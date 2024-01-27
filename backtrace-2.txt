@@ -1,0 +1,9 @@
+* thread #1, name = 'godot.linuxbsd.', stop reason = signal SIGSEGV: invalid address (fault address: 0x0)
+    frame #0: 0x00007fffe6ac37a2 libgdext_crash.so`godot_core::builtin::meta::registration::method::ClassMethodInfo::register_extension_class_method::h9f14a951cb161793(self=0x0000555575558158) at method.rs:102:33
+   99  	   pub fn register_extension_class_method(&self) {
+   100 	       use crate::obj::EngineBitfield as _;
+   101 	
+-> 102 	       let (return_value_info, return_value_metadata) = match &self.return_value {
+   103 	           Some(info) => (Some(&info.info), info.metadata),
+   104 	           None => (None, 0),
+   105 	       };

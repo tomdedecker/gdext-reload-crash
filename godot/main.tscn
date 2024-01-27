@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4w7jnkqfasc8"]
+
+[sub_resource type="MyResource" id="MyResource_n36th"]
+my_property = 10.0
+
+[node name="main" type="Node3D"]
+
+[node name="MyNode" type="MyNode" parent="."]
+resource = SubResource("MyResource_n36th")

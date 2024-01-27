@@ -1,0 +1,58 @@
+Assertion failed: (byte_size > 0 && byte_size <= 8 && "GetMaxU64 invalid byte_size!"), function GetMaxU64, file /usr/src/debug/lldb/lldb-16.0.6.src/source/Utility/DataExtractor.cpp, line 526
+backtrace leading to the failure:
+ #0 0x000075734621f503 llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) (/usr/lib/libLLVM-16.so+0xe1f503)
+ #1 0x000075734ddd0005 (/usr/lib/liblldb.so.16+0x5d0005)
+ #2 0x000075734ddd0235 (/usr/lib/liblldb.so.16+0x5d0235)
+ #3 0x000075734dc7f1c5 (/usr/lib/liblldb.so.16+0x47f1c5)
+ #4 0x000075734e2a9849 (/usr/lib/liblldb.so.16+0xaa9849)
+ #5 0x000075734e29dea7 (/usr/lib/liblldb.so.16+0xa9dea7)
+ #6 0x000075734dc712b5 (/usr/lib/liblldb.so.16+0x4712b5)
+ #7 0x000075734dc59a36 (/usr/lib/liblldb.so.16+0x459a36)
+ #8 0x000075734dc5dd26 (/usr/lib/liblldb.so.16+0x45dd26)
+ #9 0x000075734e2bdb7a (/usr/lib/liblldb.so.16+0xabdb7a)
+#10 0x000075734dc2a98d (/usr/lib/liblldb.so.16+0x42a98d)
+#11 0x000075734de9fa3d (/usr/lib/liblldb.so.16+0x69fa3d)
+#12 0x000075734dc2af74 (/usr/lib/liblldb.so.16+0x42af74)
+#13 0x000075734dc2b72e (/usr/lib/liblldb.so.16+0x42b72e)
+#14 0x000075734dc2b72e (/usr/lib/liblldb.so.16+0x42b72e)
+#15 0x000075734dc2b2dd (/usr/lib/liblldb.so.16+0x42b2dd)
+#16 0x000075734dd69431 (/usr/lib/liblldb.so.16+0x569431)
+#17 0x000075734dda5818 (/usr/lib/liblldb.so.16+0x5a5818)
+#18 0x000075734e15a327 (/usr/lib/liblldb.so.16+0x95a327)
+#19 0x000075734e1780c9 (/usr/lib/liblldb.so.16+0x9780c9)
+#20 0x000075734dccd9e5 (/usr/lib/liblldb.so.16+0x4cd9e5)
+#21 0x000075734e2b9a52 (/usr/lib/liblldb.so.16+0xab9a52)
+#22 0x000075734e136fff (/usr/lib/liblldb.so.16+0x936fff)
+#23 0x000075734dccacd1 (/usr/lib/liblldb.so.16+0x4cacd1)
+#24 0x000075734e2ba3a2 (/usr/lib/liblldb.so.16+0xaba3a2)
+#25 0x000075734dcbcac5 (/usr/lib/liblldb.so.16+0x4bcac5)
+#26 0x000075734dc396f3 (/usr/lib/liblldb.so.16+0x4396f3)
+#27 0x000075734dc12ee9 (/usr/lib/liblldb.so.16+0x412ee9)
+#28 0x000075734dcbe11c (/usr/lib/liblldb.so.16+0x4be11c)
+#29 0x000075734d9fb3e7 lldb::SBDebugger::RunCommandInterpreter(bool, bool) (/usr/lib/liblldb.so.16+0x1fb3e7)
+#30 0x000055fb001fec4f (/usr/bin/lldb+0x6c4f)
+#31 0x0000757344e45cd0 (/usr/lib/libc.so.6+0x27cd0)
+#32 0x0000757344e45d8a __libc_start_main (/usr/lib/libc.so.6+0x27d8a)
+#33 0x000055fb001ff885 (/usr/bin/lldb+0x7885)
+please file a bug report against lldb reporting this failure log, and as many details as possible
+* thread #1, name = 'godot.linuxbsd.', stop reason = signal SIGSEGV: address access protected (fault address: 0x7fffffffd748)
+  * frame #0: 0x00007fffffffd748
+    frame #1: 0x000055555b65b3a7 godot.linuxbsd.editor.x86_64.llvm`Variant::reference(this=0x0000555571b105b0, p_variant=0x0000555571b106d8) at variant.cpp:1155:23
+    frame #2: 0x000055555b958575 godot.linuxbsd.editor.x86_64.llvm`ClassDB::class_get_default_property_value(p_class=<unavailable>, p_property=0x00007fffffffd7c0, r_valid=0x00007fffffffd72f) at class_db.cpp:1732:16
+    frame #3: 0x00005555598d5422 godot.linuxbsd.editor.x86_64.llvm`PropertyUtils::get_property_default_value(p_object=0x000055555e14f420, p_property=0x00007fffffffd7c0, r_is_valid=0x00007fffffffd7cf, p_states_stack_cache=<unavailable>, p_update_exports=false, p_owner=0x0000000000000000, r_is_class_default=0x00007fffffffd7ce) at property_utils.cpp:120:19
+    frame #4: 0x0000555558d6585b godot.linuxbsd.editor.x86_64.llvm`EditorProperty::_update_pin_flags() at editor_inspector.cpp:869:3
+    frame #5: 0x0000555558d657d1 godot.linuxbsd.editor.x86_64.llvm`EditorProperty::_update_pin_flags(this=0x00005555672c8330) at editor_inspector.cpp:894:8
+    frame #6: 0x0000555558d88b02 godot.linuxbsd.editor.x86_64.llvm`EditorInspector::update_tree(this=0x00005555651fe020) at editor_inspector.cpp:3339:9
+    frame #7: 0x000055555b96e5fb godot.linuxbsd.editor.x86_64.llvm`Object::emit_signalp(this=0x000055555c088650, p_name=0x00007fffffffdd20, p_args=0x0000000000000000, p_argcount=0) at object.cpp:1127:15
+    frame #8: 0x000055555b946607 godot.linuxbsd.editor.x86_64.llvm`GDExtensionManager::reload_extensions() [inlined] Error Object::emit_signal<>(this=0x000055555c088650, p_name=0x00007fffffffdd20) at object.h:922:10
+    frame #9: 0x000055555b9465f4 godot.linuxbsd.editor.x86_64.llvm`GDExtensionManager::reload_extensions(this=0x000055555c088650) at gdextension_manager.cpp:256:3
+    frame #10: 0x000055555b966124 godot.linuxbsd.editor.x86_64.llvm`CallQueue::_call_function(this=<unavailable>, p_callable=0x000055555ecd45c0, p_args=0x000055555ecd45d8, p_argcount=0, p_show_error=false) at message_queue.cpp:221:13
+    frame #11: 0x000055555b9666bb godot.linuxbsd.editor.x86_64.llvm`CallQueue::flush(this=0x000055555c3bdba0) at message_queue.cpp:326:6
+    frame #12: 0x00005555599f7bd1 godot.linuxbsd.editor.x86_64.llvm`SceneTree::physics_process(this=0x000055555ee0dda0, p_time=0) at scene_tree.cpp:471:33
+    frame #13: 0x0000555557ae52db godot.linuxbsd.editor.x86_64.llvm`Main::iteration() at main.cpp:3596:45
+    frame #14: 0x0000555557a6cc2d godot.linuxbsd.editor.x86_64.llvm`OS_LinuxBSD::run(this=0x00007fffffffdfc8) at os_linuxbsd.cpp:933:7
+    frame #15: 0x0000555557a63704 godot.linuxbsd.editor.x86_64.llvm`main(argc=<unavailable>, argv=<unavailable>) at godot_linuxbsd.cpp:74:6
+    frame #16: 0x00007ffff7a20cd0 libc.so.6`___lldb_unnamed_symbol3187 + 128
+    frame #17: 0x00007ffff7a20d8a libc.so.6`__libc_start_main + 138
+    frame #18: 0x0000555557a63525 godot.linuxbsd.editor.x86_64.llvm`_start + 37
+
